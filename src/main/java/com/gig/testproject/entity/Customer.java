@@ -2,13 +2,13 @@ package com.gig.testproject.entity;
 
 import java.util.List;
 
-import jakarta.persistence.CascadeType;
 //import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
-import jakarta.persistence.OneToMany;
+//import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 
 @Entity
 @Table(name = "customers")
@@ -21,16 +21,17 @@ public class Customer {
     private String lastName;
     private String email;
 
-    // Define the one-to-many relationship between Customer and Account
-    @OneToMany(mappedBy = "customerId", cascade = CascadeType.ALL)
-    private List<Account> accounts;
+    // Define the many-to-one relationship between Customer and Account
+    @Transient
+    private Account account;
 
     private double balance;
 
-    public Customer(String firstName, String lastName, String email) {
+    public Customer(String firstName, String lastName, String email, double balance) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
+        this.balance = balance;
     }
 
     public Customer(){
@@ -69,21 +70,27 @@ public class Customer {
         this.email = email;
     }
 
-    public List<Account> getAccounts() {
-        return accounts;
+
+    public Account getAccounts() {
+        return account;
     }
 
-    public void setAccounts(List<Account> accounts) {
-        this.accounts = accounts;
+    public void setAccounts(Account account) {
+        this.account = account;
+    }
+
+    public void setBalance(double balance){
+        this.balance = balance;
     }
 
     public double getBalance(){
         return balance;
     }
-
-    public void setBalance(){
-        this.balance = accounts.stream().mapToDouble(Account::getBalance).sum();
-    }
     
+    public double calculateBalance(){
+        this.balance = account.getBalance();
+
+        return balance;
+    }
     
 }

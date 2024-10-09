@@ -5,12 +5,14 @@ public class CustomerDto {
     private String firstName;
     private String lastName;
     private String email;
+    private double balance;
 
-    public CustomerDto(Long id, String firstName, String lastName, String email) {
+    public CustomerDto(Long id, String firstName, String lastName, String email, double balance) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
+        this.balance = balance;
     }
 
     public Long getId() {
@@ -38,5 +40,12 @@ public class CustomerDto {
         this.email = email;
     }
 
+    public double getBalance() {
+        return balance;
+    }
+
+    public void setBalance(double balance) {
+        this.balance = balance;
+    }
     
 }

@@ -6,7 +6,8 @@ import java.util.Date;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -16,17 +17,22 @@ public class Account {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long accountId;
 
-    @ManyToOne
     private Long customerId;
-    
+
+    @OneToOne
+    @JoinColumn(name = "customerId", referencedColumnName = "id", insertable = false, updatable = false)
+    private Customer customer;
+
     private double balance;
     private Date createdAt;
-    
-    public Account(Long customerId) {
+
+    public Account(Long customerId, double balance, Date createdAt) {
         this.customerId = customerId;
+        this.balance = balance;
+        this.createdAt = createdAt;
     }
 
-    public Account(){
+    public Account() {
     }
 
     public Long getAccountId() {
@@ -37,12 +43,12 @@ public class Account {
         this.accountId = accountId;
     }
 
-    public Long getCustomerId() {
-        return customerId;
+    public Customer getCustomer() {
+        return customer;
     }
 
-    public void setCustomerId(Long customerId) {
-        this.customerId = customerId;
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 
     public double getBalance() {
@@ -61,6 +67,12 @@ public class Account {
         this.createdAt = createdAt;
     }
 
-    
+    public Long getCustomerId() {
+        return customerId;
+    }
+
+    public void setCustomerId(Long customerId) {
+        this.customerId = customerId;
+    }
     
 }

@@ -64,6 +64,6 @@ public class CustomerController {
     public ResponseEntity<String> deleteCustomer(@PathVariable("id") Long customerId){
         customerService.deleteCustomer(customerId);
 
-        return ResponseEntity.ok("Employee deleted successfully!");
+        return ResponseEntity.ok("Customer deleted successfully!");
     }
 }
