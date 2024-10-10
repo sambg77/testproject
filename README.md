@@ -62,7 +62,7 @@ curl -X GET http://localhost:8080/api/accounts
 curl -X POST "http://localhost:8080/api/transactions/{fromAccountId}/{toAccountId}?amount={amount}"
 
 # Add Top up REST API
-curl -X POST "http://localhost:8080/api/transactions/{accountId}/?amount={50}"
+curl -X POST "http://localhost:8080/api/transactions/topup/{accountId}?amount={50}"
 
 # Get Transaction REST API
 curl -X GET http://localhost:8080/api/transactions/{id}
