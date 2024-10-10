@@ -51,7 +51,7 @@ public class CustomerController {
         return ResponseEntity.ok(customers);
     }
 
-    // Build Update Employee REST API
+    // Build Update Customer REST API
     @PutMapping("{id}")
     public ResponseEntity<CustomerDto> updateCustomer(@PathVariable("id") Long customerId, @RequestBody CustomerDto updatedCustomer){
         CustomerDto customerDto = customerService.updateCustomer(customerId, updatedCustomer);
@@ -59,7 +59,7 @@ public class CustomerController {
         return ResponseEntity.ok(customerDto);
     }
 
-    // Build Delete Employee REST API
+    // Build Delete Customer REST API
     @DeleteMapping("{id}")
     public ResponseEntity<String> deleteCustomer(@PathVariable("id") Long customerId){
         customerService.deleteCustomer(customerId);
