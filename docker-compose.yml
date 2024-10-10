@@ -26,3 +26,17 @@ services:
       - SPRING_JPA_HIBERNATE_DDL_AUTO=update
     depends_on:
       - psql-db
+
+  populate-db:
+    image: curlimages/curl:latest
+    depends_on:
+      - repo
+    command:  >
+      sh -c "
+        while ! nc -z repo 8080; do sleep 1; done;
+        sleep 5;
+        echo 'Sending requests....';
+        curl -X POST http://repo:8080/api/customers -H 'Content-Type: application/json' -d '{\"firstName\":\"Emma\", \"lastName\":\"Borg\", \"email\":\"emmab@gmail.com\", \"balance\":50}';
+        curl -X POST http://repo:8080/api/customers -H 'Content-Type: application/json' -d '{\"firstName\":\"Sammy\", \"lastName\":\"BG\", \"email\":\"sammyBG@gmail.com\", \"balance\":250}';
+        curl -X POST http://repo:8080/api/customers -H 'Content-Type: application/json' -d '{\"firstName\":\"Joseph\", \"lastName\":\"Smith\", \"email\":\"jsm@gmail.com\", \"balance\":150}';
+      "
