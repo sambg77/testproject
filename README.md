@@ -7,7 +7,13 @@ implementation) for money transfers between accounts.
 
 Make sure you have postgres installed and ready to run.
 
-Use docker-compose in the root directory to create an image and a container of our project.
+First package the application as a JAR file:
+
+```bash
+mvn clean package -DskipTests
+```
+
+Then, use docker-compose in the root directory to create an image and a container of our project.
 
 ```bash
 docker-compose up
